@@ -26,6 +26,9 @@ class LinksController < ApplicationController
     end
   end
 
+  def stats
+  end
+
   private
 
   def link_params

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root to: 'links#new'
 
+  get '/stats', to: 'links#stats'
   get '/:slug', to: 'links#show'
 
   resources :links, only: [:create]
