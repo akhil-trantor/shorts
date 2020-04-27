@@ -16,7 +16,7 @@ class Link < ApplicationRecord
   enum status: [:active, :inactive]
 
   # Methods
-  def set_ip_and_country(resquest)
+  def set_ip_and_country(request)
     self.ip_address = request.ip
     self.country    = request.location.country
   end
@@ -39,7 +39,7 @@ class Link < ApplicationRecord
   end
 
   def set_valid_till
-    self.valid_till = (DateTime.now + VALID_FOR_DAYS.days)
+    self.valid_till = (Time.now + VALID_FOR_DAYS.days)
   end
 
 end
