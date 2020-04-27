@@ -10,7 +10,7 @@ class Link < ApplicationRecord
   # Callbacks
   before_create :generate_slug
   before_create :set_valid_till
-  before_save :sanitize_url
+  before_save :set_sanitized_url
 
   # Scope
   enum status: [:active, :inactive]
@@ -24,6 +24,13 @@ class Link < ApplicationRecord
   def is_valid?
     self.valid_till > Time.now
   end
+
+  def self.sanitized_url(url)
+    url.strip!
+    url = url.downcase.gsub(/(https?:\/\/)|(www\.)/, "")
+    return "http://#{ url }"
+  end
+
   private
 
   def generate_slug
@@ -35,10 +42,8 @@ class Link < ApplicationRecord
     end
   end
 
-  def sanitize_url
-    self.url.strip!
-    self.url = self.url.downcase.gsub(/(https?:\/\/)|(www\.)/, "")
-    self.url = "http://#{self.url}"
+  def set_sanitized_url
+    self.url = Link.sanitized_url(self.url)
   end
 
   def set_valid_till
