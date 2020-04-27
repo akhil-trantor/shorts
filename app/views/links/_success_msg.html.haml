@@ -1,0 +1,8 @@
+
+- link = (link || existing_link)
+.title
+  %h3
+  = (existing_link ? 'Short url already exists, here it is!' : 'Here is your short URL!' )
+.short-url
+  %h4
+    = [request.base_url, link.slug].join('/')

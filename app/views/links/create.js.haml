@@ -1,0 +1,7 @@
+- if @existing_link || (@link.present? && @link.persisted?)
+  jQuery('.link-form').html("#{j render partial: 'form', locals: { link: Link.new }}")
+  jQuery('.short-url-section').html("#{j render partial: 'success_msg', locals: { link: @link, existing_link: @existing_link }}")
+
+- else # there are validation errors
+  jQuery('.link-form').html("#{j render partial: 'form', locals: { link: @link }}")
+  jQuery('.short-url-section').html("")

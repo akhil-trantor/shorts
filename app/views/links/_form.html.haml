@@ -1,0 +1,9 @@
+= form_for(link, remote: true, method: :post) do |f|
+  = f.label :url, 'Please enter your url here'
+  .url-field
+    = f.text_field :url
+    - if link.errors.present? && link.errors[:url].present?
+      .error
+        = link.errors[:url].join(', ')
+  .submit
+    = f.submit
