@@ -12,6 +12,8 @@ class Link < ApplicationRecord
   before_create :set_valid_till
   before_save :sanitize_url
 
+  # Scope
+  enum status: [:active, :inactive]
   # Methods
 
   private
