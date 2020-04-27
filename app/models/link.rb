@@ -14,7 +14,12 @@ class Link < ApplicationRecord
 
   # Scope
   enum status: [:active, :inactive]
+
   # Methods
+  def set_ip_and_country(resquest)
+    self.ip_address = request.ip
+    self.country    = request.location.country
+  end
 
   private
 
