@@ -21,6 +21,9 @@ class Link < ApplicationRecord
     self.country    = request.location.country
   end
 
+  def is_valid?
+    self.valid_till > Time.now
+  end
   private
 
   def generate_slug
