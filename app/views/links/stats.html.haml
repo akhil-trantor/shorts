@@ -1,0 +1,20 @@
+- base_url = request.base_url
+
+.jumbotron.text-center
+  %h1 Analytics
+
+.container
+  - @links.each do |link|
+    %hr
+    .row
+      .col-sm-12
+        .row
+          .col-sm-12.text-center
+            %h3.bold
+              = link.url
+          .col-sm-12.text-center
+            = [base_url, link.slug].join('/')
+          .col-sm-12.text-center
+            %br
+            = "Total Clicks: #{link.clicks_count}"
+

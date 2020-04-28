@@ -27,6 +27,8 @@ class LinksController < ApplicationController
   end
 
   def stats
+    #TODO add pagination
+    @links = Link.all
   end
 
   private
