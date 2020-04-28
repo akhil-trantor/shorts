@@ -22,6 +22,6 @@ Run the following command in your terminal:
 Run the following command in your terminal:
 `rake db:migrate`
 
-### Database initialization
+### How to run the test suite
 Run the following command in your terminal:
 `rspec`
