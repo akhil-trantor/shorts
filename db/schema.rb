@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200428085233) do
+ActiveRecord::Schema.define(version: 20200428090711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20200428085233) do
     t.bigint "link_id"
     t.string "country"
     t.inet "ip_address"
-    t.string "agent"
+    t.text "agent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["link_id"], name: "index_link_analytics_on_link_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20200428085233) do
     t.datetime "valid_till"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "agent"
+    t.text "agent"
   end
 
 end
