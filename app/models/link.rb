@@ -1,11 +1,16 @@
 class Link < ApplicationRecord
 
+  include AnalyticsMethods
+
   # Constants
   UNIQUE_SLUG_LENGTH = 5
   VALID_FOR_DAYS = 30
 
   # Validations
   validates :url, url: true
+
+  # Associations
+  has_many :link_analytics, dependent: :destroy
 
   # Callbacks
   before_create :generate_slug
@@ -16,10 +21,6 @@ class Link < ApplicationRecord
   enum status: [:active, :inactive]
 
   # Methods
-  def set_ip_and_country(request)
-    self.ip_address = request.ip
-    self.country    = request.location.country
-  end
 
   def is_valid?
     self.valid_till > Time.now
@@ -29,6 +30,12 @@ class Link < ApplicationRecord
     url.strip!
     url = url.downcase.gsub(/(https?:\/\/)|(www\.)/, "")
     return "http://#{ url }"
+  end
+
+  def save_analytics_data(request)
+    analytics = self.link_analytics.new
+    analytics.set_analytics_data(request)
+    analytics.save
   end
 
   private

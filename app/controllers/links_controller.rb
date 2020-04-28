@@ -10,7 +10,7 @@ class LinksController < ApplicationController
     unless @existing_link.present?
       @link = Link.new(link_params)
       if @link.valid?
-        @link.set_ip_and_country(request)
+        @link.set_analytics_data(request)
         @link.save
       end
     end
@@ -19,7 +19,7 @@ class LinksController < ApplicationController
   def show
     link = Link.find_by slug: params[:slug]
     if link.present? && link.is_valid? && link.active?
-      link.increment!(:clicks_count)
+      link.save_analytics_data(request)
       redirect_to link.url and return
     else
       redirect_to :root, alert: 'Invalid short code' and return
