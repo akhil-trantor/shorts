@@ -60,6 +60,7 @@ end
 group :test do
   gem 'shoulda', '~> 3.5'
   gem 'shoulda-matchers', '~> 2.0'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
