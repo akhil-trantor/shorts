@@ -42,7 +42,7 @@ class Link < ApplicationRecord
 
   def generate_slug
     new_slug = rand(36**UNIQUE_SLUG_LENGTH).to_s(36)
-    if Link.where(slug: new_slug).exists?
+    if Link.where(slug: new_slug).exists? || new_slug.length != UNIQUE_SLUG_LENGTH
       generate_slug
     else
       self.slug = new_slug
