@@ -1,7 +1,9 @@
-%h2
-  Welcome to short.com
-.link-form
-  = render partial: 'form', locals: { link: @link }
-.short-url-section
+.jumbotron.text-center
+  %h1 Welcome to short.com
+.container
+  .row
+    .col-sm-12.text-center.link-form
+      = render partial: 'form', locals: { link: @link }
+  .short-url-section.text-center
 
 
