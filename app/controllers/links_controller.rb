@@ -28,7 +28,7 @@ class LinksController < ApplicationController
 
   def stats
     #TODO add pagination
-    @links = Link.all
+    @links = Link.all.includes(:link_analytics)
   end
 
   private

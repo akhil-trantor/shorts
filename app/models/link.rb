@@ -38,6 +38,11 @@ class Link < ApplicationRecord
     analytics.save
   end
 
+  def top_countries
+    return [] if (link_analytics.blank? || link_analytics.pluck(:country).blank?)
+    link_analytics.pluck(:country).flatten.group_by {|i| i}.sort_by {|_, a| -a.count}.map(&:first)
+  end
+
   private
 
   def generate_slug
