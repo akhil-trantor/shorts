@@ -82,7 +82,27 @@ RSpec.describe Link, type: :model do
     it 'default status value is active' do
       expect(link.status).to eq 'active'
     end
+  end
 
+  describe 'test methods' do
+
+    context 'test is_valid method' do
+      it 'return false' do
+        link = Link.new(valid_till: 2.days.ago)
+        expect(link.is_valid?).to eq(false)
+      end
+
+      it 'return true' do
+        link = Link.new(valid_till: (Time.now + 2.days))
+        expect(link.is_valid?).to eq(true)
+      end
+    end
+
+    context 'test sanitized_url method' do
+      it { expect(Link.sanitized_url('https://google.com')).to eq('http://google.com') }
+      it { expect(Link.sanitized_url('https://www.google.com')).to eq('http://google.com') }
+      it { expect(Link.sanitized_url('http://google.com')).to eq('http://google.com') }
+    end
 
   end
 
