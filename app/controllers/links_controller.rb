@@ -1,3 +1,4 @@
+# The LinksController used to group all actions related to links functionality
 class LinksController < ApplicationController
 
   before_action :check_existing_link, only: [:create]

@@ -1,3 +1,4 @@
+# The AnalyticsMethods module encapsulates all method related to analytics
 module AnalyticsMethods
   extend ActiveSupport::Concern
 
