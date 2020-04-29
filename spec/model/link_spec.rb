@@ -84,9 +84,9 @@ RSpec.describe Link, type: :model do
     end
   end
 
-  describe 'test methods' do
+  describe 'public methods' do
 
-    context 'test is_valid method' do
+    context '#is_valid?' do
       it 'return false' do
         link = Link.new(valid_till: 2.days.ago)
         expect(link.is_valid?).to eq(false)
@@ -98,10 +98,18 @@ RSpec.describe Link, type: :model do
       end
     end
 
-    context 'test sanitized_url method' do
+    context '#sanitized_url' do
       it { expect(Link.sanitized_url('https://google.com')).to eq('http://google.com') }
       it { expect(Link.sanitized_url('https://www.google.com')).to eq('http://google.com') }
       it { expect(Link.sanitized_url('http://google.com')).to eq('http://google.com') }
+    end
+
+    context '#top_countries' do
+      link = Link.last
+      link.link_analytics.create(country: 'USA')
+      link.link_analytics.create(country: 'India')
+      link.link_analytics.create(country: 'India')
+      it { expect(link.top_countries).to eq(['India', 'USA']) }
     end
 
   end
