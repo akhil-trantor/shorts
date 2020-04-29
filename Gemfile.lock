@@ -298,6 +298,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda (~> 3.5)
   shoulda-matchers (~> 2.0)
+  simplecov
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
