@@ -4,27 +4,39 @@
 ### Ruby version
     Ruby 2.5.1
 
-### Configuration
-Run the following command in your terminal:
-`bundle install`
+### cross cutting notes
+* you may have to prepend commands with "bundle exec" depending on your setup
+* There's no standard around rb_env or rvm
 
-Create application.yml file inside config folder and add following configuration values:
+## Setting up the app
+* install homebrew (https://brew.sh/)
+* `brew install postgres` (or do elephant version from postgresapp.com)
+* git clone https://github.com/ApplePieGitHub/apc
+* create config/application.yml file and add below given configuration values.
+* get ruby with https://rvm.io/rvm/install
+* `\curl -sSL https://get.rvm.io | bash`
+* `rvm install ruby-2.5.1`
+* `gem install bundler`
+* `bundle install`
+* start postgres (postgres -D /usr/local/var/postgresql &)
+* `rake db:create`
+* `rake db:migrate`
+
+### Configuration
+
+Add following configuration values inside config/application.yml file:
 - DB_USER_NAME: '********'
 - DB_PASSWORD: '********'
 - TEST_DB_NAME: '********'
 - DB_NAME: '********'
 
-### Database creation
-Run the following command in your terminal:
-`rake db:create`
-
-### Database initialization
-Run the following command in your terminal:
-`rake db:migrate`
-
 ### How to run the test suite
 Run the following command in your terminal:
 `rspec`
+
+### How to check test coverage
+Run the following command in your terminal:
+`open coverage/index.html`
 
 ### Reason For Scalability Issue:
 As the number of records increase, after a certain level, the application response time will start to increase.
@@ -33,7 +45,7 @@ the queries for the addition of new record in link_analytics and updation of cli
 Performing simpler solutions(indexing or data caching) alone will not be able to fix the
 scalability issues.
 
-### Solution For Scalability Issue:
+### Possible Solution For Scalability Issue:
 Following are the possibe solutions which can help reduce the scalability issues:
 
 1) **Use of load balancers and Orchestration Tools (Kubernetes):**
