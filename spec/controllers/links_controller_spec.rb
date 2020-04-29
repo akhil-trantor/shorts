@@ -10,14 +10,14 @@ RSpec.describe LinksController, type: :controller do
       end
     end
 
-    context "with invalid slug" do
-      it "redirect to root" do
+    context "redirect to root with invalid slug" do
+      it "with inactive link" do
         link.inactive!
         get :show, params: { slug: link.slug }
         expect(response).to redirect_to(:root)
       end
 
-      it "redirect to root" do
+      it "with expired link" do
         link.active!
         link.update_column(:valid_till, (Time.now - 2.days))
         get :show, params: { slug: link.slug }
@@ -47,6 +47,45 @@ RSpec.describe LinksController, type: :controller do
     it "renders the :stats template" do
       get :stats
       expect(response).to render_template(:stats)
+    end
+  end
+
+  describe "POST create" do
+    context "with valid attributes" do
+      it "creates a new link" do
+        expect{
+          post :create, xhr: true, params: {link: {url: Faker::Internet.url}}
+        }.to change(Link,:count).by(1)
+      end
+
+      it "assigns link to @link" do
+        post :create, xhr: true, params: {link: {url: Faker::Internet.url}}
+        expect(assigns(:link)).to eq(Link.last)
+      end
+
+      it "assigns nil to @link" do
+        post :create, xhr: true, params: {link: {url: Link.last.url}}
+        expect(assigns(:link)).to eq(nil)
+      end
+
+      it "assigns nil to @existing_link" do
+        post :create, xhr: true, params: {link: {url: Faker::Internet.url}}
+        expect(assigns(:existing_link)).to eq(nil)
+      end
+
+    end
+
+    context "with invalid attributes" do
+      it "does not save the new link" do
+        expect{
+          post :create, xhr: true, params: {link: {url: nil}}
+        }.to_not change(Link,:count)
+      end
+
+      it "does raises validation error" do
+        post :create, xhr: true, params: {link: {url: nil}}
+        expect(assigns(:link).errors[:url]).to include("is not a valid URL")
+      end
     end
   end
 
