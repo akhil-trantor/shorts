@@ -1,0 +1,9 @@
+# mode_ci:
+#   enabled: true # default is false
+#   branch: 'production' # default is master
+# branch: 'production' # default is master
+# deduplicate_symlinks: true # default is false
+# suppress_ratings: true # default is false
+paths: # Files to analyse.
+  - 'app/controllers/'
+  - 'app/models/'
