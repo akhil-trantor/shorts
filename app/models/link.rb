@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: links
+#
+#  id           :integer(8)      not null, primary key
+#  url          :text
+#  slug         :string
+#  clicks_count :integer
+#  country      :string
+#  ip_address   :inet
+#  status       :integer         default("0")
+#  valid_till   :datetime
+#  created_at   :datetime        not null
+#  updated_at   :datetime        not null
+#  agent        :text
+#
 class Link < ApplicationRecord
 
   include AnalyticsMethods
@@ -64,3 +80,4 @@ class Link < ApplicationRecord
   end
 
 end
+
