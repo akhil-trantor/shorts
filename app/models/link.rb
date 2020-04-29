@@ -39,8 +39,9 @@ class Link < ApplicationRecord
   end
 
   def top_countries
-    return [] if (link_analytics.blank? || link_analytics.pluck(:country).blank?)
-    link_analytics.pluck(:country).flatten.group_by {|i| i}.sort_by {|_, a| -a.count}.map(&:first)
+    link_countries = link_analytics.pluck(:country)
+    return [] if (link_analytics.blank? || link_countries.blank?)
+    link_countries.flatten.group_by {|country_name| country_name}.sort_by {|_, country_arr| -country_arr.count}.map(&:first)
   end
 
   private
